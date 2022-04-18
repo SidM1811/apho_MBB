@@ -73,8 +73,8 @@ function step() {
     else document.getElementById("drop_button").disabled = SVGComponentTransferFunctionElement;
 
     if (getMagn(B_x, B_y) >= B_crit) {
+        if (measuring && falling) measureToggle();
         falling = false;
-        if (measuring) measureToggle();
     }
     animate(step);
 }
