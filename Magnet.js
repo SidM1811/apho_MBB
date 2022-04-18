@@ -128,6 +128,20 @@ class Magnet {
 			context.lineTo(point.x, point.y);
 		}
 		context.fill();
+		//border
+		context.strokeStyle = "#000000";
+		context.beginPath();
+		for (let point of this.points) {
+			context.lineTo(point.x, point.y);
+		}
+		context.lineTo(this.points[0].x, this.points[0].y);
+		context.stroke();
+		context.beginPath();
+		for (let point of this.blue_points) {
+			context.lineTo(point.x, point.y);
+		}
+		context.lineTo(this.blue_points[0].x, this.blue_points[0].y);
+		context.stroke();
 	}
 	select() {
 		this.selected = true;
