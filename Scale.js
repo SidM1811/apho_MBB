@@ -5,6 +5,7 @@ class Scale {
         this.y = y;
         this.width = width/scaling_factor;
         this.height = height/scaling_factor;
+	this.least_count = 0.001/scaling_factor;
 
         this.points = [];
         this.ticks = [];
@@ -22,7 +23,7 @@ class Scale {
 
         this.angle = 0;
 
-        this.least_count = 0.001/scaling_factor;
+      
     }
     update() {
         if (this.selected) {
