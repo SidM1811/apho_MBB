@@ -429,11 +429,10 @@ class Magnet {
 			this.on_ground = true;
 			this.velocity=0;
 			this.segment_v0y=0;
-			error_display.innerHTML="Magnet has hit the floor!";
 			falling=false;
 			//pauseToggle();
 		} else {
-			if(this.on_ground)error_display.innerHTML="";
+			//if(this.on_ground)error_display.innerHTML="";
 			this.on_ground = false;
 		}
 		for (let point of this.points) point.y += this.y - old_y;
