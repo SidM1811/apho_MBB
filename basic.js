@@ -54,6 +54,7 @@ function step() {
         update();
         render();
     }
+
     if (measuring) {
         Bx_values.push(B_x);
         By_values.push(B_y);
@@ -68,7 +69,13 @@ function step() {
     if (falling && !paused) {
         magnet.fall();
     }
+    if (getMagn(B_x, B_y) < B_crit && measuring) document.getElementById("drop_button").disabled = false;
+    else document.getElementById("drop_button").disabled = SVGComponentTransferFunctionElement;
 
+    if (getMagn(B_x, B_y) >= B_crit) {
+        falling = false;
+        if (measuring) measureToggle();
+    }
     animate(step);
 }
 
@@ -176,7 +183,6 @@ function measureToggle() {
     if (!measuring) {
         measuring = true;
         measure_button.innerHTML = "Pause Measurement";
-        document.getElementById("drop_button").disabled = false;
     }
     else {
         measuring = false;
