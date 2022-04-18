@@ -206,4 +206,11 @@ function drawGrid() {
 		context.stroke();
 		i += 0.01 / scaling_factor;
 	}
+	context.fillStyle = "#00ff00";
+	context.beginPath();
+	context.moveTo(0, canvas_height - 0.001 / scaling_factor);
+	context.lineTo(canvas_width, canvas_height - 0.001 / scaling_factor);
+	context.lineTo(canvas_width, canvas_height);
+	context.lineTo(0, canvas_height);
+	context.fill();
 }
