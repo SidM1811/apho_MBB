@@ -5,6 +5,7 @@ let gravity, dt;
 let magnetism_multiplier, distance_multiplier;
 let Bx_values = [];
 let By_values = [];
+let B_crit = 4e3;
 let timestamps = [];
 let magnet_x_values = [];
 let magnet_y_values = [];
@@ -23,7 +24,7 @@ function dropMagnet() {
 		falling = true;
 		magnet.initFall();
 	}
-	if (paused)pauseToggle();
+	//if (paused)pauseToggle();
 }
 
 function resetMeasurements() {
@@ -39,7 +40,7 @@ function resetMeasurements() {
 function resetMagnet() {
 	falling = false;
 	magnet.resetPosition();
-	if (!paused)pauseToggle();
+	//if (!paused)pauseToggle();
 }
 
 function update() {
