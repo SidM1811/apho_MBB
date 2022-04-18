@@ -17,7 +17,6 @@ let graph_context = graph_canvas.getContext("2d");
 
 let b_display = document.getElementById("b-display");
 let t_display = document.getElementById("t-display");
-let error_display = document.getElementById("error-display");
 
 let mob_angle = document.getElementById("mob-angle");
 let mob_display = document.getElementById("mob-display");
@@ -61,6 +60,7 @@ function step() {
         magnet_x_values.push(magnet.x * distance_multiplier);  
         magnet_y_values.push(magnet.y * distance_multiplier);     
         timestamps.push(time);
+        datatable.push([time, magnet.x*distance_multiplier,magnet.y*distance_multiplier,B_x,B_y])
         if(time-Math.floor(2*time)/2<1/fps)drawGraph(simul_start_time_input.value,simul_end_time_input.value);
         time += dt;
         updateParams('time');
@@ -176,12 +176,34 @@ function measureToggle() {
     if (!measuring) {
         measuring = true;
         measure_button.innerHTML = "Pause Measurement";
+        document.getElementById("drop_button").disabled = false;
     }
     else {
         measuring = false;
         measure_button.innerHTML = "Start Measurement";
-        let mydata = [timestamps,Bx_values,By_values,magnet_y_values]
-        export_csv(mydata, ',', "pipedata")
+        document.getElementById("drop_button").disabled = SVGComponentTransferFunctionElement;
+
+/* 	    console.log("t,bx,by");
+        console.log(timestamps);
+        console.log(Bx_values);
+        console.log(By_values);
+        console.log(magnet_x_values);
+        console.log(magnet_y_values);
+        console.log("pipe coordinates");
+        console.log(pipe.points);
+        console.log("magnetometer and mobile angle")
+        console.log(magnetometer.angle);
+        console.log("magnetometer x and y");
+        console.log([magnetometer.x,magnetometer.y]);
+        console.log('mobile points');
+        console.log(mob.points);
+        console.log('pipe');
+        console.log(pipe.points);
+        console.log('Scale factor');
+        console.log(scaling_factor);
+ */
+        //let mydata = [timestamps,Bx_values,By_values,magnet_y_values]
+        // export_csv(datatable, ',', "pipedata")
     }
 }
 
@@ -198,15 +220,20 @@ function pauseToggle() {
 
 const export_csv = (arrayData, delimiter, fileName) => {
    //  alert("in export");
-    let csv = "Table contains row wise data: time stamps, Bx, By, magnet.y\n";
-    arrayData.forEach( array => {
-        csv += array.join()+"\n";
-    });
-    csv += "Pipe corner points as (x,y) \n"
+    let csv = "Magnet in Pipe Simulation Data\n";
+    csv += "Pipe corner points as (x,y) ,";
     pipe.points.forEach(point => {
         csv += (point.x*scaling_factor).toString() + "," + (point.y*scaling_factor).toString() + ","
     });
-    csv += "\n Scale Factor = " + scaling_factor.toString() + "\n"
+    csv += "\n";
+    csv += "K values in pipe, 1.96, 0.00, 5.88 \n";
+    csv += "Magentometer Location : ," + (magnetometer.x*scaling_factor).toString() + (magnetometer.x*scaling_factor).toString() +"\n"; 
+    csv += "Scale Factor = " + scaling_factor.toString() + "\n"
+    csv += "t, Mx, My, Bx, By\n";
+    arrayData.forEach( array => {
+        csv += array.join()+"\n";
+    });
+
 
     let csvData = new Blob([csv], { type: 'text/csv' });  
     let csvUrl = URL.createObjectURL(csvData);
