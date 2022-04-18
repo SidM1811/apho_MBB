@@ -8,11 +8,9 @@ let By_values = [];
 let timestamps = [];
 let magnet_x_values = [];
 let magnet_y_values = [];
+let datatable = [];
 let graph = undefined;
 let falling, measuring;
-
-let high_B;
-let B_crit=4e3;
 
 let B_x, B_y;
 
@@ -21,16 +19,11 @@ let start_time, end_time;
 
 function dropMagnet() {
 	if (!falling) {
-		error_display.innerHTML="";
 		magnet.backupPosition();
 		falling = true;
 		magnet.initFall();
 	}
-	if(!measuring){
-		falling=false;
-		error_display.innerHTML="Error: Dropped without starting measurement! Press Start Measurement before the drop";
-	}
-	//if (paused)pauseToggle();
+	if (paused)pauseToggle();
 }
 
 function resetMeasurements() {
@@ -39,13 +32,14 @@ function resetMeasurements() {
 	magnet_x_values = [];
 	magnet_y_values = [];
 	timestamps = [];
+	datatable = [];
 	time = 0;
 }
 
 function resetMagnet() {
 	falling = false;
 	magnet.resetPosition();
-	//if (!paused)pauseToggle();
+	if (!paused)pauseToggle();
 }
 
 function update() {
@@ -71,14 +65,6 @@ function update() {
 	// for debugging purposes only. Seems to calculate angle correctly
 	b_display.innerHTML =`Angle between r and m: ${toDegree(theta).toFixed(2)} <br> <br>`;
 
-	let B_mag = getMagn(B_x,B_y);
-	high_B = (B_mag>B_crit);
-	
-	if(high_B){
-		falling=false;
-		error_display.innerHTML = `Error: Magnetic field > ${B_crit.toFixed(0)} μT ! Please adjust mobile before the drop`;
-	}
-	
 	B_x = constant_part * dipole_moment * (3 * rdotm * disp_x / Math.pow(distance, 5) - magnet_x / Math.pow(distance, 3)) * magnetism_multiplier;
 	B_y = constant_part * dipole_moment * (3 * rdotm * disp_y / Math.pow(distance, 5) - magnet_y / Math.pow(distance, 3)) * magnetism_multiplier;
 
@@ -220,12 +206,4 @@ function drawGrid() {
 		context.stroke();
 		i += 0.01 / scaling_factor;
 	}
-	//floor
-	context.fillStyle = "#00ff00";
-	context.beginPath();
-	context.moveTo(0,canvas_height-0.001/scaling_factor);
-	context.lineTo(canvas_width,canvas_height-0.001/scaling_factor);
-	context.lineTo(canvas_width,canvas_height);
-	context.lineTo(0,canvas_height);
-	context.fill();
 }
