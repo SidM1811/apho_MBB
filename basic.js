@@ -207,7 +207,7 @@ function measureToggle() {
     }
 }
 
-function pauseToggle() {
+/*function pauseToggle() {
     if (!paused) {
         paused = true;
         pause_button.innerHTML = "Resume";
@@ -216,7 +216,7 @@ function pauseToggle() {
         paused = false;
         pause_button.innerHTML = "Pause";
     }
-}
+}*/
 
 const export_csv = (arrayData, delimiter, fileName) => {
    //  alert("in export");
