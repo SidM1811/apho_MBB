@@ -11,7 +11,7 @@ let magnet_y_values = [];
 let graph = undefined;
 let falling, measuring;
 
-let high_b;
+let high_B;
 let B_crit=4e3;
 
 let B_x, B_y;
@@ -21,6 +21,7 @@ let start_time, end_time;
 
 function dropMagnet() {
 	if (!falling) {
+		error_display.innerHTML="";
 		magnet.backupPosition();
 		falling = true;
 		magnet.initFall();
@@ -72,7 +73,12 @@ function update() {
 
 	let B_mag = getMagn(B_x,B_y);
 	high_B = (B_mag>B_crit);
-	console.log(high_B);
+	
+	if(high_B){
+		falling=false;
+		error_display.innerHTML = `Error: Magnetic field > ${B_crit.toFixed(0)} μT ! Please adjust mobile before the drop`;
+	}
+	
 	B_x = constant_part * dipole_moment * (3 * rdotm * disp_x / Math.pow(distance, 5) - magnet_x / Math.pow(distance, 3)) * magnetism_multiplier;
 	B_y = constant_part * dipole_moment * (3 * rdotm * disp_y / Math.pow(distance, 5) - magnet_y / Math.pow(distance, 3)) * magnetism_multiplier;
 

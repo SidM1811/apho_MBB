@@ -29,30 +29,12 @@ class Pipe {
         updated = false;
     }
     render() {
-        // context.fillStyle = "#1f51ff";
-        // context.beginPath();
-        // for(let point of this.points) {
-        //     context.lineTo(point.x, point.y);
-        // }
-        // context.fill();
-
-        // context.fillStyle = "#ff1818";
-        // context.beginPath();
-        // for(let point of this.blue_points) {
-        //     context.lineTo(point.x, point.y);
-        // }
-        // context.fill();
-
-        context.strokeStyle = "#000000";
+        context.fillStyle = "#000000";
         context.beginPath();
-        context.moveTo(this.points[0].x, this.points[0].y);
-        context.lineTo(this.points[3].x, this.points[3].y);
-        context.stroke();
-
-        context.beginPath();
-        context.moveTo(this.points[1].x, this.points[1].y);
-        context.lineTo(this.points[2].x, this.points[2].y);
-        context.stroke();
+        for(let point of this.points) {
+            context.lineTo(point.x, point.y);
+        }
+        context.fill();
     }
     select() {
         this.selected = true;
