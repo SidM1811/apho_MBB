@@ -29,12 +29,19 @@ class Pipe {
         updated = false;
     }
     render() {
-        context.fillStyle = "#000000";
+        context.fillStyle = "#FFFFFF";
+        var my_gradient = context.createLinearGradient(this.points[0].x, 0, this.points[1].x, 0);
+        my_gradient.addColorStop(0, "black");
+        my_gradient.addColorStop(0.5, "#888888");
+        my_gradient.addColorStop(1, "black");
+        context.fillStyle = my_gradient;
         context.beginPath();
+        context.moveTo(this.points[3].x,this.points[3].y);
         for(let point of this.points) {
             context.lineTo(point.x, point.y);
         }
         context.fill();
+        context.stroke();
     }
     select() {
         this.selected = true;
@@ -106,7 +113,7 @@ class Pipe {
             },
             {
                 x: this.x + this.width / 2,
-                y: this.y,
+                y: this.y - this.height / 2
             },
             {
                 x: this.x - this.width / 2,

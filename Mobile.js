@@ -41,6 +41,12 @@ class Mobile {
     render() {
         context.strokeStyle = "#000000";
         context.fillStyle = "rgba(128,128,128,0.5)";
+        var my_gradient = context.createLinearGradient(this.points[0].x, 0, this.points[1].x, 0);
+        my_gradient.addColorStop(0, "black");
+        my_gradient.addColorStop(0.03, "rgba(128,128,128,0.5)");
+        my_gradient.addColorStop(0.97, "rgba(128,128,128,0.5)");
+        my_gradient.addColorStop(1, "black");
+        context.fillStyle = my_gradient;
         context.beginPath();
         context.moveTo(this.points[3].x, this.points[3].y);
         for(let point of this.points) {
