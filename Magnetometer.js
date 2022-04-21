@@ -4,7 +4,7 @@ class Magnetometer {
         this.relative_y = y / scaling_factor + mob.points[0].y - mob.y;
         this.x = 0;
         this.y = 0;
-        this.radius = 1;
+        this.radius = 0;
 
         this.update();
         this.angle = 0;

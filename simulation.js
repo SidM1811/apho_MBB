@@ -12,6 +12,7 @@ let magnet_y_values = [];
 let datatable = [];
 let graph = undefined;
 let falling, measuring;
+let show_scale;
 
 let B_x, B_y;
 

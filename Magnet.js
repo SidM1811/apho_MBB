@@ -37,30 +37,34 @@ class Magnet {
 		this.angle = 0;
 	}
 	update() {
-		if ( shift_key_pressed ){
-			this.x = this.initial_x + click_x - this.selected_x;
-		}
-		else if ( cntrl_key_pressed ) {
-			this.y = this.initial_y + click_y - this.selected_y;
-		}
-		else {
-			this.x = this.initial_x + click_x - this.selected_x;
-			this.y = this.initial_y + click_y - this.selected_y;
-		}
-		this.makeRects();
-		let prev_angle = this.angle;
-		this.angle = 0;
-		this.transform(prev_angle);
+		if (!falling) {
+			if (shift_key_pressed) {
+				this.x = this.initial_x + click_x - this.selected_x;
+			}
+			else if (cntrl_key_pressed) {
+				this.y = this.initial_y + click_y - this.selected_y;
+			}
+			else {
+				this.x = this.initial_x + click_x - this.selected_x;
+				this.y = this.initial_y + click_y - this.selected_y;
+			}
+			this.makeRects();
+			let prev_angle = this.angle;
+			this.angle = 0;
+			this.transform(prev_angle);
 
-		updated = false;
+			updated = false;
+		}
 	}
 
 	updateonarrowkeys() {
-		this.makeRects();
-		let prev_angle = this.angle;
-		this.angle = 0;
-		this.transform(prev_angle);
-		updated = false;
+		if (!falling) {
+			this.makeRects();
+			let prev_angle = this.angle;
+			this.angle = 0;
+			this.transform(prev_angle);
+			updated = false;
+		}
 	}
 
 /* 	fall() {
