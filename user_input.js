@@ -1,3 +1,4 @@
+let fine_factor = 1;
 function clicked() {
     if(insidePolygon(click_x, click_y, magnet.points)) {
         magnet.select();
@@ -61,19 +62,27 @@ function keyPressed(key) {
     switch (key) {
         case "ArrowLeft":
             // left pressed
-            magnet.x -= 0.0002 / scaling_factor;
+            magnet.x -= 0.0002 / scaling_factor / fine_factor;
             break;
         case "ArrowRight":
             // Right pressed
-            magnet.x += 0.0002 / scaling_factor;
+            magnet.x += 0.0002 / scaling_factor / fine_factor;
             break;
         case "ArrowUp":
             // Up pressed
-            magnet.y -= 0.0002 / scaling_factor;
+            magnet.y -= 0.0002 / scaling_factor / fine_factor;
             break;
         case "ArrowDown":
             // Down pressed
-            magnet.y += 0.0002 / scaling_factor;
+            magnet.y += 0.0002 / scaling_factor / fine_factor;
+            break;
+        case "Control":
+            cntrl_key_pressed = true;
+            fine_factor *= 20;
+            break;
+        case "Shift":
+            shift_key_pressed = true;
+            fine_factor /= 20;
             break;
     }
     magnet.updateonarrowkeys()
@@ -81,5 +90,12 @@ function keyPressed(key) {
 }
 
 function keyReleased(key) {
-    
+    switch (key) {
+        case "Control":
+            cntrl_key_pressed = false;
+            break;
+        case "Shift":
+            shift_key_pressed = false;
+            break;
+    }
 }

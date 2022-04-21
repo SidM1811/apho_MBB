@@ -139,7 +139,7 @@ else {
     canvas.addEventListener("mousemove", function (e) {
         getMousePosition(canvas, e);
         shift_key_pressed = e.shiftKey;
-        cntrl_key_pressed = e.altKey;
+        cntrl_key_pressed = e.cntrlKey;
         moved();
     });
 
