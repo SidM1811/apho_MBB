@@ -142,11 +142,11 @@ function initParams() {
 	magnetism_multiplier = Math.pow(10, 6);
 
 	// in meters
-	let mobile_width = 0.06;
+	let mobile_width = 0.07;
 	let mobile_height = 0.15;
 
 	// in meters, with respect to top left corner of phone
-	let magnetometer_x = 0.05;
+	let magnetometer_x = 0.06;
 	let magnetometer_y = 0.01;
 
 	// in meters
