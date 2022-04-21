@@ -4,6 +4,9 @@ class Magnet {
 
 		this.x = x;
 		this.y = y;
+
+		this.radius = 1;
+
 		this.angle = 0;
 
 		this.width = width / scaling_factor;
@@ -146,6 +149,10 @@ class Magnet {
 		}
 		context.lineTo(this.blue_points[0].x, this.blue_points[0].y);
 		context.stroke();
+		context.fillStyle = "#000000";
+		context.beginPath();
+		context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+		context.fill();
 	}
 	select() {
 		this.selected = true;
