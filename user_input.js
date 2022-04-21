@@ -61,19 +61,19 @@ function keyPressed(key) {
     switch (key) {
         case "ArrowLeft":
             // left pressed
-            magnet.x -= 0.001 / scaling_factor;
+            magnet.x -= 0.0002 / scaling_factor;
             break;
         case "ArrowRight":
             // Right pressed
-            magnet.x += 0.001 / scaling_factor;
+            magnet.x += 0.0002 / scaling_factor;
             break;
         case "ArrowUp":
             // Up pressed
-            magnet.y -= 0.001 / scaling_factor;
+            magnet.y -= 0.0002 / scaling_factor;
             break;
         case "ArrowDown":
             // Down pressed
-            magnet.y += 0.001 / scaling_factor;
+            magnet.y += 0.0002 / scaling_factor;
             break;
     }
     magnet.updateonarrowkeys()
