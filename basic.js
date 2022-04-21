@@ -32,6 +32,7 @@ let scale_display = document.getElementById("scale-display");
 let coord_display = document.getElementById("coord-display");
 
 let measure_button = document.getElementById("measure-button");
+let scale_button = document.getElementById("scale-button");
 
 let simul_start_time_input = document.getElementById("simul-start-time-input");
 let simul_end_time_input = document.getElementById("simul-end-time-input");
@@ -253,4 +254,17 @@ const export_csv = (arrayData, delimiter, fileName) => {
     hiddenElement.target = '_blank';
     hiddenElement.download = fileName + '.csv';
     hiddenElement.click();
+}
+
+function scaleToggle() {
+    if (!show_scale) {
+        show_scale = true;
+        scale_button.innerHTML = "Hide Scale";
+    }
+    else {
+
+        show_scale = false;
+        scale_button.innerHTML = "Show Scale";
+    }
+    updated = false;
 }

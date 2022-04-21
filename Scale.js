@@ -5,7 +5,7 @@ class Scale {
         this.y = y;
         this.width = width/scaling_factor;
         this.height = height/scaling_factor;
-	this.least_count = 0.001/scaling_factor;
+	    this.least_count = 0.001/scaling_factor;
 
         this.points = [];
         this.ticks = [];
@@ -41,7 +41,7 @@ class Scale {
             if (prev_angle < 0) {
                 prev_angle += 360;
             }
-            scale_display.innerHTML = `Angle of orientation of magnet: ${Math.trunc(prev_angle * 100) / 100}`;
+            scale_display.innerHTML = `Angle of orientation of scale: ${Math.trunc(prev_angle * 100) / 100}`;
             scale_angle.value = Math.trunc(prev_angle);
             this.makeRect();
             this.angle = 0;
@@ -51,17 +51,19 @@ class Scale {
         updated = false;
     }
     render() {
-        context.strokeStyle = "#000000";
-        context.beginPath();
-        context.moveTo(this.points[3].x, this.points[3].y);
-        for (let point of this.points) {
-            context.lineTo(point.x, point.y);
+        if (show_scale) {
+            context.strokeStyle = "#000000";
+            context.beginPath();
+            context.moveTo(this.points[3].x, this.points[3].y);
+            for (let point of this.points) {
+                context.lineTo(point.x, point.y);
+            }
+            for (let point of this.ticks) {
+                context.moveTo(point.x1, point.y1);
+                context.lineTo(point.x2, point.y2);
+            }
+            context.stroke();
         }
-        for (let point of this.ticks) {
-            context.moveTo(point.x1, point.y1);
-            context.lineTo(point.x2, point.y2);
-        }
-        context.stroke();
     }
     select() {
         this.selected = true;
