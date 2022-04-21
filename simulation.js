@@ -65,7 +65,8 @@ function update() {
 	let theta = Math.acos(rdotm / magnet_magn / disp_magn);
 
 	// for debugging purposes only. Seems to calculate angle correctly
-	b_display.innerHTML =`Angle between r and m: ${toDegree(theta).toFixed(2)} <br> <br>`;
+	// b_display.innerHTML =`Angle between r and m: ${toDegree(theta).toFixed(2)} <br> <br>`;
+	b_display.innerHTML = '';
 
 	B_x = constant_part * dipole_moment * (3 * rdotm * disp_x / Math.pow(distance, 5) - magnet_x / Math.pow(distance, 3)) * magnetism_multiplier;
 	B_y = constant_part * dipole_moment * (3 * rdotm * disp_y / Math.pow(distance, 5) - magnet_y / Math.pow(distance, 3)) * magnetism_multiplier;
