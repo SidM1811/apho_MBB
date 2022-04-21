@@ -26,6 +26,10 @@ function getDotProduct(x1, y1, x2, y2) {
     return x1 * y1 + x2 * y2;
 }
 
+const clamp = (num, a, b) => Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+
+const clampNumber = (num) => clamp(num, -B_crit, B_crit);
+
 function insidePolygon(x, y, polygon) {
     let x1, y1, x2, y2;
     let x3 = x, y3 = y;

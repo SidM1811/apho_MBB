@@ -69,17 +69,27 @@ function update() {
 	B_x = constant_part * dipole_moment * (3 * rdotm * disp_x / Math.pow(distance, 5) - magnet_x / Math.pow(distance, 3)) * magnetism_multiplier;
 	B_y = constant_part * dipole_moment * (3 * rdotm * disp_y / Math.pow(distance, 5) - magnet_y / Math.pow(distance, 3)) * magnetism_multiplier;
 
-	let orientation = toRadian(mob_angle.value);
+	if (getMagn(B_x, B_y) > B_crit) {
+		error_display.innerHTML = 'Maximum Magnetic field exceeded';
+		B_x = NaN;
+		B_y = NaN;
+	}
+	else {
+		error_display.innerHTML = '';
+		let orientation = toRadian(mob_angle.value);
 
-	// rotation
-	let B_x_prime = Math.cos(orientation) * B_x + Math.sin(orientation) * B_y;
-	let B_y_prime = -Math.sin(orientation) * B_x + Math.cos(orientation) * B_y;
+		// rotation
+		let B_x_prime = Math.cos(orientation) * B_x + Math.sin(orientation) * B_y;
+		let B_y_prime = -Math.sin(orientation) * B_x + Math.cos(orientation) * B_y;
 
-	B_x = B_x_prime;
-	B_y = B_y_prime;
-	b_display.innerHTML += `B<sub>x</sub>: ${B_x.toFixed(6)} μT <br> B<sub>y</sub>: ${B_y.toFixed(6)} μT`;
+		B_x = B_x_prime;
+		B_y = B_y_prime;
+		b_display.innerHTML += `B<sub>x</sub>: ${clampNumber
+			(B_x.toFixed(6))} μT <br> B<sub>y</sub>: ${clampNumber
+				(B_y.toFixed(6))} μT`;
 
-	updated = true;
+		updated = true;
+	}
 }
 
 function render() {

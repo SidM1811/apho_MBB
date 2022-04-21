@@ -17,6 +17,8 @@ let graph_context = graph_canvas.getContext("2d");
 
 let b_display = document.getElementById("b-display");
 let t_display = document.getElementById("t-display");
+let error_display = document.getElementById("error-display");
+
 
 let mob_angle = document.getElementById("mob-angle");
 let mob_display = document.getElementById("mob-display");
@@ -56,8 +58,10 @@ function step() {
     }
 
     if (measuring) {
-        Bx_values.push(B_x);
-        By_values.push(B_y);
+        Bx_values.push(clampNumber
+            (B_x.toFixed(6)));
+        By_values.push(clampNumber
+            (B_y.toFixed(6)));
         magnet_x_values.push(magnet.x * distance_multiplier);  
         magnet_y_values.push(magnet.y * distance_multiplier);     
         timestamps.push(time);
