@@ -1,116 +1,108 @@
 <!DOCTYPE html>
 <html lang="en-US">
-   <head>
-      <title>Pipe (merged) | Visualize It</title>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <!-- Materialize -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <!-- Chart JS -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script src="basic.js" defer></script>
-      <script src="user_input.js" defer></script>
-      <script src="Magnet.js" defer></script>
-      <script src="Mobile.js" defer></script>
-      <script src="Magnetometer.js" defer></script>
-      <script src="Pipe.js" defer></script>
-      <script src="Scale.js" defer></script>
-      <script src="graph.js" defer></script>
-      <script src="utils.js" defer></script>
-      <script src="simulation.js" defer></script>
-      <script type="text/javascript" async
-         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-      <!-- CSS -->
-      <link rel="stylesheet" href="style.css" />
-   </head>
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M95CKRP8HB"></script>
-   <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
-      gtag('config', 'G-M95CKRP8HB');
-   </script>
-   <body>
-      <nav class="nav-extended" style="background:black; margin-top: 0mm">
-         <div class="nav-wrapper">
-            <h1 id="main-heading">Visualize It</h1>
-         </div>
-         <div class="nav-content">
-            <ul class="tabs tabs-transparent tabs-fixed-width">
-               <li class="tab"><a href="../index.html">Home</a></li>
-               <li class="tab"><a href="../about.html">About</a></li>
-            </ul>
-         </div>
-      </nav>
-   </body>
-   <div class="text">
-      <h2>Pipe</h2>
-      <div class="container">
-         <div class="row">
-            <div class="col s12 l7">
-                <center>
-                    <canvas id="canvas"></canvas>
-                    <br>
-                    <button class="btn purple darken-4" onclick="dropMagnet()" id="drop_button" disabled>Drop</button>
-                    <!--<button class="btn purple darken-4" onclick="pauseToggle()" id="pause_button">Pause</button>-->
-                    <button class="btn purple darken-4" onclick="resetMagnet()">Reset Positions</button>
-                    <br> <br>
-                    <button class="btn purple darken-4" onclick="finer()" id="finer-button">2X Finer magnet movement</button>
-                    <button class="btn purple darken-4" onclick="coarser()" id="coarser-button">2X Coarser magnet movement</button>
-                    <br> <br>
-                    <button class="btn purple darken-4" onclick="measureToggle()" id="measure-button">Start Measurement</button>
-                    <button class="btn purple darken-4" onclick="resetGraph()">Reset Graph</button>
-                    <br> <br>
-                    <button class="btn purple darken-4" onclick="scaleToggle()" id="scale-button">Show Scale</button>
-                    <br> <br>
 
-                </center>
-            </div>
-            <div class="col s12 l4 push-l1">
-               <center>
-                  Intergrid spacing: 1 cm
-                  <!--<p id="coord-display"></p>-->
-                  <p id="b-display"></p>
-                  <p id="t-display"></p>
-		          <p id="error-display"></p>
-               </center>
-               <center>
-                  <div class="col s12">
-                     <p id="mob-display"></p>
-                     <input id="mob-angle" type="range" min="0" max="359" step="1" oninput="updateParams('mob-angle')" onchange="updateParams('mob-angle')">
-                  </div>
-                  <div class="col s12">
-                     <p id="magnet-display"></p>
-                     <input id="magnet-angle" type="range" min="0" max="359" step="1" oninput="updateParams('magnet-angle')" onchange="updateParams('magnet-angle')">
-                  </div>
-                  <div class="col s12">
-                     <p id="scale-display"></p>
-                     <input id="scale-angle" type="range" min="0" max="359" step="1" oninput="updateParams('scale-angle')" onchange="updateParams('scale-angle')">
-                  </div>
-                  <div class="col s12">
-                     <span>Start time:</span>
-                     <input id="simul-start-time-input" type="number" onchange="updateParams('simul-start-time-input')">
-                  </div>
-                  <div class="col s12">
-                     <span>End time:</span>
-                     <input id="simul-end-time-input" type="number" onchange="updateParams('simul-end-time-input')">
-                  </div>
-               </center>
-            </div>
+<head>
+   <title>Pipe | HBCSE</title>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <!-- Materialize -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   <!-- Chart JS -->
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <!-- MathJax -->
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+   <!-- Our Scripts -->
+   <script src="basic.js" defer></script>
+   <script src="user_input.js" defer></script>
+   <script src="Magnet.js" defer></script>
+   <script src="Mobile.js" defer></script>
+   <script src="Magnetometer.js" defer></script>
+   <script src="Pipe.js" defer></script>
+   <script src="Scale.js" defer></script>
+   <script src="graph.js" defer></script>
+   <script src="utils.js" defer></script>
+   <script src="simulation.js" defer></script>
+   <!-- CSS -->
+   <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+</body>
+
+<div class="text">
+   <h2>Pipe</h2>
+   <div class="container">
+      <div class="row">
+         <div class="col s12 l7">
+            <center>
+               <canvas id="canvas"></canvas>
+            </center>
          </div>
-         <h2>B<sub>x</sub> & B<sub>y</sub>vs t graph</h2>
+         <div class="col s12 l4 push-l1">
+            <center>
+               Intergrid spacing: 1 cm
+               <!--<p id="coord-display"></p>-->
+               <p id="b-display"></p>
+               <p id="t-display"></p>
+               <p id="error-display"></p>
+            </center>
+            <center>
+               <div class="col s12">
+                  <!-- <p id="mob-display"></p> -->
+                  <span>Rotate mobile</span>
+                  <input id="mob-angle" type="range" min="0" max="359" step="1" oninput="updateParams('mob-angle')"
+                     onchange="updateParams('mob-angle')">
+               </div>
+               <div class="col s12">
+                  <!-- <p id="magnet-display"></p> -->
+                  <span>Rotate magnet</span>
+                  <input id="magnet-angle" type="range" min="0" max="359" step="1"
+                     oninput="updateParams('magnet-angle')" onchange="updateParams('magnet-angle')">
+               </div>
+               <div class="col s12">
+                  <!-- <p id="scale-display"></p> -->
+                  <span>Rotate scale</span>
+                  <input id="scale-angle" type="range" min="0" max="359" step="1" oninput="updateParams('scale-angle')"
+                     onchange="updateParams('scale-angle')">
+               </div>
+               <div class="col s12">
+                  <span>Start time:</span>
+                  <input id="simul-start-time-input" type="number" onchange="updateParams('simul-start-time-input')">
+               </div>
+               <div class="col s12">
+                  <span>End time:</span>
+                  <input id="simul-end-time-input" type="number" onchange="updateParams('simul-end-time-input')">
+               </div>
+               <div class="col s12">
+                  <br>
+                  <button class="btn purple darken-4" onclick="dropMagnet()" id="drop_button" disabled>Drop</button>
+                  <button class="btn purple darken-4" onclick="resetMagnet()">Reset Positions</button>
+                  <br> <br>
+
+               </div>
+            </center>
+         </div>
       </div>
-	<center>
-    <canvas id="graph-canvas"></canvas>
-  </center>
-      <br>
-      <br>
-      <br />
-      <hr />
-      <br />
-      <p class="center-align">Developed by ChanRT | Fork me at <a href="https://www.github.com/chanrt">GitHub</a></p>
+      <center>
+         <button class="btn purple darken-4" onclick="measureToggle()" id="measure-button">Start
+            Measurement</button>
+         <button class="btn purple darken-4" onclick="resetGraph()">Reset Graph</button>
+         <button class="btn purple darken-4" onclick="scaleToggle()" id="scale-button">Show Scale</button>
+         <br> <br>
+         <!--<button class="btn purple darken-4" onclick="pauseToggle()" id="pause_button">Pause</button>-->
+         <button class="btn purple darken-4" onclick="finer()" id="finer-button">2X Finer magnet movement</button>
+         <button class="btn purple darken-4" onclick="coarser()" id="coarser-button">2X Coarser magnet
+            movement</button>
+      </center>
+      <h2>B<sub>x</sub> & B<sub>y</sub>vs t graph</h2>
    </div>
+
+   <center>
+      <canvas id="graph-canvas"></canvas>
+   </center>
+</div>
+
 </html>

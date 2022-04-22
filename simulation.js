@@ -99,6 +99,7 @@ function render() {
 	context.fillRect(0, 0, canvas_width, canvas_height);
 
 	drawGrid();
+	drawArrows();
 
 	mob.render();
 	magnetometer.render();
@@ -112,17 +113,17 @@ function updateParams(variable) {
 		let angle = Number.parseInt(mob_angle.value);
 		mob.transform(angle);
 		magnetometer.transform(angle);
-		mob_display.innerHTML = `Angle of orientation of mobile: ${mob.angle}`;
+		// mob_display.innerHTML = `Angle of orientation of mobile: ${mob.angle}`;
 		updated = false;
 	}
 	if (variable == "magnet-angle") {
 		magnet.transform(Number.parseInt(magnet_angle.value));
-		magnet_display.innerHTML = `Angle of orientation of magnet: ${magnet.angle}`;
+		// magnet_display.innerHTML = `Angle of orientation of magnet: ${magnet.angle}`;
 		updated = false;
 	}
 	if (variable == "scale-angle") {
 		scale.transform(Number.parseInt(scale_angle.value));
-		scale_display.innerHTML = `Angle of orientation of scale: ${scale.angle}`;
+		// scale_display.innerHTML = `Angle of orientation of scale: ${scale.angle}`;
 		updated = false;
 	}
 	if (variable == "time") {
@@ -130,12 +131,12 @@ function updateParams(variable) {
 	}
 	if (variable == "simul-start-time-input") {
 		start_time = Number.parseFloat(simul_start_time_input.value);
-		drawGraph(start_time,end_time);
+		drawGraph(start_time, end_time);
 		updated = false;
 	}
 	if (variable == "simul-end-time-input") {
 		end_time = Number.parseFloat(simul_end_time_input.value);
-		drawGraph(start_time,end_time);
+		drawGraph(start_time, end_time);
 		updated = false;
 	}
 }
@@ -157,6 +158,13 @@ function initParams() {
 	let mobile_width = 0.07;
 	let mobile_height = 0.15;
 
+	// grid position of mobile's left corner
+	let i = 4, j = 4;
+
+	// coords of mobile's left corner
+	let mob_x = (i * 0.01 + mobile_width / 2) / scaling_factor;
+	let mob_y = (j * 0.01 + mobile_height / 2) / scaling_factor;
+
 	// in meters, with respect to top left corner of phone
 	let magnetometer_x = 0.06;
 	let magnetometer_y = 0.01;
@@ -166,14 +174,18 @@ function initParams() {
 	let pipe_diameter = 0.01;
 
 	// in meters
+	let magnet_x = mob_x + (0.03 + mobile_width / 2) / scaling_factor;
+	let magnet_y = canvas_height / 2;
+
+	// in meters
 	let magnet_length = 0.005;
 	let magnet_diameter = 0.0025;
 
 	// all objects
-	mob = new Mobile(canvas_width / 4, canvas_width / 2, mobile_width, mobile_height);
-	magnet = new Magnet(1 * canvas_width / 2, canvas_height / 2, magnet_diameter, magnet_length);
+	mob = new Mobile(mob_x, mob_y, mobile_width, mobile_height);
+	magnet = new Magnet(magnet_x, magnet_y, magnet_diameter, magnet_length);
 	magnetometer = new Magnetometer(magnetometer_x, magnetometer_y);
-	pipe = new Pipe(3 * canvas_width / 4, canvas_height / 2, pipe_diameter, pipe_length);
+	pipe = new Pipe(7 * canvas_width / 8, canvas_height / 2, pipe_diameter, pipe_length);
 	scale = new Scale(3 * canvas_width / 5, canvas_height / 2, 0.02, 0.15);
 
 	mob_angle.value = 0;
@@ -184,7 +196,7 @@ function initParams() {
 
 	scale_angle.value = 0;
 	updateParams("scale-angle");
-	
+
 	start_time = 0;
 	simul_start_time_input.value = start_time;
 
@@ -198,6 +210,41 @@ function initParams() {
 	gravity = 9.8;
 	dt = 1 / fps;
 	initGraph();
+
+	context.font = `${Math.floor(0.01 / scaling_factor)}px Times New Roman`;
+	context.textAlign = "center";
+}
+
+function drawArrows() {
+	let arrow_length = 200;
+	context.strokeStyle = "#000000";
+	context.fillStyle = "#000000";
+
+	let x = 0.015 / scaling_factor;
+	let y = 0.005 / scaling_factor;
+	drawArrow(x, y, x + arrow_length, y);
+	context.fillText("x", 1.25 * x + arrow_length, 1.25 * y);
+
+	x = 0.005 / scaling_factor;
+	y = 0.015 / scaling_factor;
+	drawArrow(x, y, x, y + arrow_length);
+	context.fillText("y", x, 1.5 * y  + arrow_length);
+}
+
+function drawArrow(from_x, from_y, to_x, to_y) {
+	let head_length = 10; // length of head in pixels
+	let dx = to_x - from_x;
+	let dy = to_y - from_y;
+	let angle = Math.atan2(dy, dx);
+
+	
+	context.beginPath()
+	context.moveTo(from_x, from_y);
+	context.lineTo(to_x, to_y);
+	context.lineTo(to_x - head_length * Math.cos(angle - Math.PI / 6), to_y - head_length * Math.sin(angle - Math.PI / 6));
+	context.moveTo(to_x, to_y);
+	context.lineTo(to_x - head_length * Math.cos(angle + Math.PI / 6), to_y - head_length * Math.sin(angle + Math.PI / 6));
+	context.stroke();
 }
 
 function drawGrid() {

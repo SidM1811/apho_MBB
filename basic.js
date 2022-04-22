@@ -12,13 +12,12 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 
-let graph_canvas=document.getElementById("graph-canvas");
+let graph_canvas = document.getElementById("graph-canvas");
 let graph_context = graph_canvas.getContext("2d");
 
 let b_display = document.getElementById("b-display");
 let t_display = document.getElementById("t-display");
 let error_display = document.getElementById("error-display");
-
 
 let mob_angle = document.getElementById("mob-angle");
 let mob_display = document.getElementById("mob-display");
@@ -46,14 +45,14 @@ if (mobile) {
 else {
     canvas_width = 0.4 * screen_width;
 }
-canvas_height = 1.2*canvas_width;
+canvas_height = 1.2 * canvas_width;
 
 canvas.width = canvas_width;
 canvas.height = canvas_height;
 
-let animate =  function (callback) {
-        window.setTimeout(callback, 1000 / fps);
-    };
+let animate = function (callback) {
+    window.setTimeout(callback, 1000 / fps);
+};
 
 function step() {
     if (!updated) {
@@ -66,11 +65,11 @@ function step() {
             (B_x.toFixed(6)));
         By_values.push(clampNumber
             (B_y.toFixed(6)));
-        magnet_x_values.push(magnet.x * distance_multiplier);  
-        magnet_y_values.push(magnet.y * distance_multiplier);     
+        magnet_x_values.push(magnet.x * distance_multiplier);
+        magnet_y_values.push(magnet.y * distance_multiplier);
         timestamps.push(time);
-        datatable.push([time, magnet.x*distance_multiplier,magnet.y*distance_multiplier,B_x,B_y])
-        if(time-Math.floor(2*time)/2<1/fps)drawGraph(simul_start_time_input.value,simul_end_time_input.value);
+        datatable.push([time, magnet.x * distance_multiplier, magnet.y * distance_multiplier, B_x, B_y])
+        if (time - Math.floor(2 * time) / 2 < 1 / fps) drawGraph(simul_start_time_input.value, simul_end_time_input.value);
         time += dt;
         updateParams('time');
     }
@@ -90,7 +89,7 @@ function step() {
 window.onload = function () {
     initParams();
     animate(step);
-    time=0;
+    time = 0;
     updateParams('time');
 }
 
@@ -146,7 +145,7 @@ else {
         moved();
     });
 
-    
+
     canvas.addEventListener("mouseup", function (e) {
         getMousePosition(canvas, e);
         pressed = false;
@@ -163,7 +162,7 @@ else {
 
 
     window.addEventListener("keydown", function (e) {
-        if ( is_cursor_on_canvas ) {
+        if (is_cursor_on_canvas) {
             keyPressed(e.key);
             e.preventDefault();
         }
@@ -197,25 +196,25 @@ function measureToggle() {
         measure_button.innerHTML = "Start Measurement";
         document.getElementById("drop_button").disabled = SVGComponentTransferFunctionElement;
 
-/* 	    console.log("t,bx,by");
-        console.log(timestamps);
-        console.log(Bx_values);
-        console.log(By_values);
-        console.log(magnet_x_values);
-        console.log(magnet_y_values);
-        console.log("pipe coordinates");
-        console.log(pipe.points);
-        console.log("magnetometer and mobile angle")
-        console.log(magnetometer.angle);
-        console.log("magnetometer x and y");
-        console.log([magnetometer.x,magnetometer.y]);
-        console.log('mobile points');
-        console.log(mob.points);
-        console.log('pipe');
-        console.log(pipe.points);
-        console.log('Scale factor');
-        console.log(scaling_factor);
- */
+        /* 	    console.log("t,bx,by");
+                console.log(timestamps);
+                console.log(Bx_values);
+                console.log(By_values);
+                console.log(magnet_x_values);
+                console.log(magnet_y_values);
+                console.log("pipe coordinates");
+                console.log(pipe.points);
+                console.log("magnetometer and mobile angle")
+                console.log(magnetometer.angle);
+                console.log("magnetometer x and y");
+                console.log([magnetometer.x,magnetometer.y]);
+                console.log('mobile points');
+                console.log(mob.points);
+                console.log('pipe');
+                console.log(pipe.points);
+                console.log('Scale factor');
+                console.log(scaling_factor);
+         */
         //let mydata = [timestamps,Bx_values,By_values,magnet_y_values]
         // export_csv(datatable, ',', "pipedata")
     }
@@ -233,23 +232,23 @@ function measureToggle() {
 }*/
 
 const export_csv = (arrayData, delimiter, fileName) => {
-   //  alert("in export");
+    //  alert("in export");
     let csv = "Magnet in Pipe Simulation Data\n";
     csv += "Pipe corner points as (x,y) ,";
     pipe.points.forEach(point => {
-        csv += (point.x*scaling_factor).toString() + "," + (point.y*scaling_factor).toString() + ","
+        csv += (point.x * scaling_factor).toString() + "," + (point.y * scaling_factor).toString() + ","
     });
     csv += "\n";
     csv += "K values in pipe, 1.96, 0.00, 5.88 \n";
-    csv += "Magentometer Location : ," + (magnetometer.x*scaling_factor).toString() + (magnetometer.x*scaling_factor).toString() +"\n"; 
+    csv += "Magentometer Location : ," + (magnetometer.x * scaling_factor).toString() + (magnetometer.x * scaling_factor).toString() + "\n";
     csv += "Scale Factor = " + scaling_factor.toString() + "\n"
     csv += "t, Mx, My, Bx, By\n";
-    arrayData.forEach( array => {
-        csv += array.join()+"\n";
+    arrayData.forEach(array => {
+        csv += array.join() + "\n";
     });
 
 
-    let csvData = new Blob([csv], { type: 'text/csv' });  
+    let csvData = new Blob([csv], { type: 'text/csv' });
     let csvUrl = URL.createObjectURL(csvData);
 
     let hiddenElement = document.createElement('a');
