@@ -35,7 +35,7 @@ function moved() {
         if(insidePolygon(click_x, click_y, scale.cornerpts)) {
             document.getElementById("canvas").style.cursor = "crosshair";
         }
-        else if (insidePolygon(click_x, click_y, scale.points)) {
+        else if (show_scale && insidePolygon(click_x, click_y, scale.points)) {
             document.getElementById("canvas").style.cursor = "move";
         }
         else {
