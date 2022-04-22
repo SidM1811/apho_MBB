@@ -34,6 +34,9 @@ let coord_display = document.getElementById("coord-display");
 let measure_button = document.getElementById("measure-button");
 let scale_button = document.getElementById("scale-button");
 
+let fine_button = document.getElementById("finer-button");
+let coarser_button = document.getElementById("coarser-button");
+
 let simul_start_time_input = document.getElementById("simul-start-time-input");
 let simul_end_time_input = document.getElementById("simul-end-time-input");
 

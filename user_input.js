@@ -1,4 +1,5 @@
 let fine_factor = 1;
+let finify = 2;
 function clicked() {
     if(insidePolygon(click_x, click_y, magnet.points)) {
         magnet.select();
@@ -43,6 +44,10 @@ function moved() {
     }
 }
 
+function finer() { fine_factor *= finify; }
+
+function coarser() { fine_factor /= finify; }
+
 function released() {
     if(magnet.selected) {
         magnet.drop();
@@ -76,26 +81,10 @@ function keyPressed(key) {
             // Down pressed
             magnet.y += 0.0002 / scaling_factor / fine_factor;
             break;
-        case "Control":
-            cntrl_key_pressed = true;
-            fine_factor *= 20;
-            break;
-        case "Shift":
-            shift_key_pressed = true;
-            fine_factor /= 20;
-            break;
     }
     magnet.updateonarrowkeys()
     updated = false;
 }
 
 function keyReleased(key) {
-    switch (key) {
-        case "Control":
-            cntrl_key_pressed = false;
-            break;
-        case "Shift":
-            shift_key_pressed = false;
-            break;
-    }
 }
