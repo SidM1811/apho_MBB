@@ -69,7 +69,7 @@ function step() {
         magnet_y_values.push(magnet.y * distance_multiplier);
         timestamps.push(time);
         datatable.push([time, magnet.x * distance_multiplier, magnet.y * distance_multiplier, B_x, B_y])
-        if (time - Math.floor(2 * time) / 2 < 1 / fps) drawGraph(simul_start_time_input.value, simul_end_time_input.value);
+        if (time - Math.floor(2 * time) / 2 < 1 / fps ) drawGraph(simul_start_time_input.value, simul_end_time_input.value);
         time += dt;
         updateParams('time');
     }
