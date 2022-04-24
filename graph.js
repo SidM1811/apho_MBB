@@ -54,7 +54,7 @@ function initGraph() {
 }
 
 function drawGraph(t_start, t_end) {
-    const jitter =0.1
+    const jitter = 0.1;
     if (time + jitter >= t_start && time <= t_end + jitter) {
         start_index = Math.max(Math.floor(t_start * fps), 0);
         end_index = Math.min(Math.ceil(t_end * fps), timestamps.length);
