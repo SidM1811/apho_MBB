@@ -198,7 +198,7 @@ function initParams() {
 	start_time = 0;
 	simul_start_time_input.value = start_time;
 
-	end_time = 10;
+	end_time = 120;
 	simul_end_time_input.value = end_time;
 
 	// mu_0 by 4 pi
