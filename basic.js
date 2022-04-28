@@ -1,6 +1,6 @@
 let screen_width = window.innerWidth, screen_height = window.innerHeight;
 let canvas_width, canvas_height;
-let fps = 500, updated = false, paused = false;
+let fps = 60, updated = false, paused = false;
 let mobile;
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
