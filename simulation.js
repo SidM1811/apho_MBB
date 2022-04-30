@@ -5,7 +5,7 @@ let gravity, dt;
 let magnetism_multiplier, distance_multiplier;
 let Bx_values = [];
 let By_values = [];
-let B_crit = 4e3;
+let B_crit = 6.5e3;
 let timestamps = [];
 let magnet_x_values = [];
 let magnet_y_values = [];
@@ -183,7 +183,7 @@ function initParams() {
 	mob = new Mobile(mob_x, mob_y, mobile_width, mobile_height);
 	magnet = new Magnet(magnet_x, magnet_y, magnet_diameter, magnet_length);
 	magnetometer = new Magnetometer(magnetometer_x, magnetometer_y);
-	pipe = new Pipe(7 * canvas_width / 8, canvas_height / 2, pipe_diameter, pipe_length);
+	pipe = new Pipe(0.17 / scaling_factor, canvas_height / 2, pipe_diameter, pipe_length);
 	scale = new Scale(3 * canvas_width / 5, canvas_height / 2, 0.02, 0.15);
 
 	mob_angle.value = 0;

@@ -78,24 +78,23 @@
                </div>
                <div class="col s12">
                   <br>
+                  <button class="btn purple darken-4" onclick="measureToggle()" id="measure-button">Start
+                     Measurement</button>
+                  <br> <br>
+                  <button class="btn purple darken-4" onclick="resetGraph()">Reset Graph</button>
+                  <br> <br>
                   <button class="btn purple darken-4" onclick="dropMagnet()" id="drop_button" disabled>Drop</button>
                   <button class="btn purple darken-4" onclick="resetMagnet()">Reset Positions</button>
                   <br> <br>
-
                </div>
             </center>
          </div>
       </div>
-      <center>
-         <button class="btn purple darken-4" onclick="measureToggle()" id="measure-button">Start
-            Measurement</button>
-         <button class="btn purple darken-4" onclick="resetGraph()">Reset Graph</button>
-         <button class="btn purple darken-4" onclick="scaleToggle()" id="scale-button">Show Scale</button>
-         <br> <br>
-         <!--<button class="btn purple darken-4" onclick="pauseToggle()" id="pause_button">Pause</button>-->
+      <center>     
          <button class="btn purple darken-4" onclick="finer()" id="finer-button">2X Finer magnet movement</button>
          <button class="btn purple darken-4" onclick="coarser()" id="coarser-button">2X Coarser magnet
             movement</button>
+         <button class="btn purple darken-4" onclick="scaleToggle()" id="scale-button">Show Scale</button>
       </center>
       <h2>B<sub>x</sub> & B<sub>y</sub>vs t graph</h2>
    </div>
