@@ -214,35 +214,19 @@ function initParams() {
 }
 
 function drawArrows() {
-	let arrow_length = 200;
-	context.strokeStyle = "#000000";
-	context.fillStyle = "#000000";
+	// let arrow_length = 200;
+	// context.strokeStyle = "#000000";
+	// context.fillStyle = "#000000";
 
-	let x = 0.015 / scaling_factor;
-	let y = 0.005 / scaling_factor;
-	drawArrow(x, y, x + arrow_length, y);
-	context.fillText("x", 1.25 * x + arrow_length, 1.25 * y);
+	// let x = 0.015 / scaling_factor;
+	// let y = 0.005 / scaling_factor;
+	// drawArrow(x, y, x + arrow_length, y);
+	// context.fillText("x", 1.25 * x + arrow_length, 1.25 * y);
 
-	x = 0.005 / scaling_factor;
-	y = 0.015 / scaling_factor;
-	drawArrow(x, y, x, y + arrow_length);
-	context.fillText("y", x, 1.5 * y  + arrow_length);
-}
-
-function drawArrow(from_x, from_y, to_x, to_y) {
-	let head_length = 10; // length of head in pixels
-	let dx = to_x - from_x;
-	let dy = to_y - from_y;
-	let angle = Math.atan2(dy, dx);
-
-	
-	context.beginPath()
-	context.moveTo(from_x, from_y);
-	context.lineTo(to_x, to_y);
-	context.lineTo(to_x - head_length * Math.cos(angle - Math.PI / 6), to_y - head_length * Math.sin(angle - Math.PI / 6));
-	context.moveTo(to_x, to_y);
-	context.lineTo(to_x - head_length * Math.cos(angle + Math.PI / 6), to_y - head_length * Math.sin(angle + Math.PI / 6));
-	context.stroke();
+	// x = 0.005 / scaling_factor;
+	// y = 0.015 / scaling_factor;
+	// drawArrow(x, y, x, y + arrow_length);
+	// context.fillText("y", x, 1.5 * y  + arrow_length);
 }
 
 function drawGrid() {

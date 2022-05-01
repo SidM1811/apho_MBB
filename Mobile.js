@@ -25,6 +25,29 @@ class Mobile {
         this.selected_y = 0;
 
         this.angle = 0;
+
+        this.arrow_deviation = 0.005 / scaling_factor;
+        this.arrow_1 = {
+            start_x: 0,
+            start_y: 0,
+            end_x: 0,
+            end_y: 0
+        }
+        this.arrow_2 = {
+            start_x: 0,
+            start_y: 0,
+            end_x: 0,
+            end_y: 0
+        }
+        this.x_label = {
+            x: 0,
+            y: 0
+        }
+        this.ylabel = {
+            x: 0,
+            y: 0
+        }
+        this.makeArrows();
     }
     update() {
         this.x = this.initial_x + click_x - this.selected_x;
@@ -37,6 +60,8 @@ class Mobile {
         magnetometer.update();
 
         updated = false;
+
+        this.makeArrows();
     }
     render() {
         context.strokeStyle = "#000000";
@@ -69,7 +94,12 @@ class Mobile {
         context.arc(this.cameracenter.x,this.cameracenter.y,this.cameraradius,0,2*Math.PI);
         context.fill();
         context.stroke();
- 
+
+        drawArrow(this.arrow_1);
+        drawArrow(this.arrow_2);
+
+        context.fillText("x", this.x_label.x, this.x_label.y);
+        context.fillText("y", this.y_label.x, this.y_label.y);
     }
     select() {
         this.selected = true;
@@ -131,7 +161,7 @@ class Mobile {
         point.y += this.y; 
         this.cameracenter = point;
 
-
+        this.makeArrows();
     }
     makeRect() {
         this.points = [
@@ -172,8 +202,75 @@ class Mobile {
         ];
         this.buttoncenter = {x: this.x, y: this.y+(68/150) * this.height};
         this.cameracenter = {x: this.x, y: this.y-(70/150) * this.height};
-     
- 
-
     }
+    makeArrows() {
+        context.strokeStyle = "#000000";
+        context.fillStyle = "#000000";
+
+        let dx = this.points[1].x - this.points[0].x;
+        let dy = this.points[1].y - this.points[0].y;
+        let theta = 3 * Math.PI / 4;
+
+        // Calculates deviation of arrow origin from left corner
+        let delta_x = dx * Math.cos(theta) + dy * Math.sin(theta);
+        let delta_y = -dx * Math.sin(theta) + dy * Math.cos(theta);
+        let magn = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+        let unit_x = (delta_x / magn) * 0.005 * Math.sqrt(2) / scaling_factor;
+        let unit_y = (delta_y / magn) * 0.005 * Math.sqrt(2) / scaling_factor;
+
+        // length of the arrow in both direction
+        let extension_x = 0.03 * Math.cos(this.angle * Math.PI / 180) / scaling_factor;
+        let extension_y = 0.03 * Math.sin(this.angle * Math.PI / 180) / scaling_factor;
+
+        this.arrow_1 = {
+            start_x: this.points[0].x + unit_x,
+            start_y: this.points[0].y + unit_y,
+            end_x: this.points[0].x + unit_x + extension_x,
+            end_y: this.points[0].y + unit_y + extension_y
+        }
+
+        this.x_label = {
+            x: this.arrow_1.end_x + 0.005 * Math.cos(this.angle * Math.PI / 180) / scaling_factor,
+            y: this.arrow_1.end_y + 0.005 * Math.sin(this.angle * Math.PI / 180) / scaling_factor
+        }
+
+        extension_x = 0.03 * Math.cos(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor;
+        extension_y = 0.03 * Math.sin(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor;
+
+        this.arrow_2 = {
+            start_x: this.points[0].x + unit_x,
+            start_y: this.points[0].y + unit_y,
+            end_x: this.points[0].x + unit_x + extension_x,
+            end_y: this.points[0].y + unit_y + extension_y
+        }
+
+        this.y_label = {
+            x: this.arrow_2.end_x + 0.005 * Math.cos(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor,
+            y: this.arrow_2.end_y + 0.005 * Math.sin(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor
+        }
+    }
+}
+
+function drawArrow(arrow) {
+    from_x = arrow.start_x;
+    from_y = arrow.start_y;
+    to_x = arrow.end_x;
+    to_y = arrow.end_y;
+
+	let head_length = 10; // length of head in pixels
+	let dx = to_x - from_x;
+	let dy = to_y - from_y;
+	let angle = Math.atan2(dy, dx);
+
+	context.beginPath()
+	context.moveTo(from_x, from_y);
+	context.lineTo(to_x, to_y);
+	context.lineTo(to_x - head_length * Math.cos(angle - Math.PI / 6), to_y - head_length * Math.sin(angle - Math.PI / 6));
+	context.moveTo(to_x, to_y);
+	context.lineTo(to_x - head_length * Math.cos(angle + Math.PI / 6), to_y - head_length * Math.sin(angle + Math.PI / 6));
+	context.stroke();
+}
+
+function getMagn(x, y) {
+    return Math.sqrt(x * x + y * y);
 }
