@@ -206,19 +206,18 @@ class Mobile {
     makeArrows() {
         context.strokeStyle = "#000000";
         context.fillStyle = "#000000";
-
+        
         let dx = this.points[1].x - this.points[0].x;
         let dy = this.points[1].y - this.points[0].y;
-        let theta = 3 * Math.PI / 4;
 
-        // Calculates deviation of arrow origin from left corner
+        // first arrow
+        let theta = 1 * Math.PI / 2;
         let delta_x = dx * Math.cos(theta) + dy * Math.sin(theta);
         let delta_y = -dx * Math.sin(theta) + dy * Math.cos(theta);
         let magn = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
-        let unit_x = (delta_x / magn) * 0.005 * Math.sqrt(2) / scaling_factor;
-        let unit_y = (delta_y / magn) * 0.005 * Math.sqrt(2) / scaling_factor;
+        let unit_x = (delta_x / magn) * 0.005 / scaling_factor;
+        let unit_y = (delta_y / magn) * 0.005 / scaling_factor;
 
-        // length of the arrow in both direction
         let extension_x = 0.03 * Math.cos(this.angle * Math.PI / 180) / scaling_factor;
         let extension_y = 0.03 * Math.sin(this.angle * Math.PI / 180) / scaling_factor;
 
@@ -233,6 +232,14 @@ class Mobile {
             x: this.arrow_1.end_x + 0.005 * Math.cos(this.angle * Math.PI / 180) / scaling_factor,
             y: this.arrow_1.end_y + 0.005 * Math.sin(this.angle * Math.PI / 180) / scaling_factor
         }
+
+        // second arrow
+        theta = Math.PI;
+        delta_x = dx * Math.cos(theta) + dy * Math.sin(theta);
+        delta_y = -dx * Math.sin(theta) + dy * Math.cos(theta);
+        magn = Math.sqrt(delta_x * delta_x + delta_y * delta_y);
+        unit_x = (delta_x / magn) * 0.005 / scaling_factor;
+        unit_y = (delta_y / magn) * 0.005 / scaling_factor;
 
         extension_x = 0.03 * Math.cos(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor;
         extension_y = 0.03 * Math.sin(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor;
