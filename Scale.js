@@ -5,7 +5,7 @@ class Scale {
         this.y = y;
         this.width = width/scaling_factor;
         this.height = height/scaling_factor;
-	    this.least_count = 0.001/scaling_factor;
+	    this.least_count = 0.002/scaling_factor;
 
         this.points = [];
         this.ticks = [];
@@ -165,15 +165,9 @@ class Scale {
         // }
 
         for (let i = 1; i < this.height/this.least_count; i++) {
-            this.ticks[i - 1] = (i%10==0?
+            this.ticks[i - 1] = (i%5==0?
 	    {
                 x1: this.x,
-                y1: this.y + i * this.least_count - this.height/2,
-                x2: this.x + this.width / 2,
-                y2: this.y + i * this.least_count - this.height/2
-            }:(i%5==0?
-	    {
-                x1: this.x+this.width/8,
                 y1: this.y + i * this.least_count - this.height/2,
                 x2: this.x + this.width / 2,
                 y2: this.y + i * this.least_count - this.height/2
@@ -182,7 +176,7 @@ class Scale {
                 y1: this.y + i * this.least_count - this.height/2,
                 x2: this.x + this.width / 2,
                 y2: this.y + i * this.least_count - this.height/2
-            }));
+            });
         }
 
         this.cornerpts = [
