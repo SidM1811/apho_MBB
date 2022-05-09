@@ -4,7 +4,7 @@ function initGraph() {
         data: {
             labels: timestamps,
             datasets: [{
-                label: "Bx (in micro T)",
+                label: "Bx (in μT)",
                 data: Bx_values,
                 backgroundColor: ["#ffffff"],
                 borderColor: ["#ffffff"],
@@ -17,7 +17,7 @@ function initGraph() {
 		animation: false
             },
 		{
-                label: "By (in micro T)",
+                label: "By (in μT)",
                 data: By_values,
                 backgroundColor: ["#00ff00"],
                 borderColor: ["#00ff00"],
@@ -34,6 +34,13 @@ function initGraph() {
             spanGaps: true,
             scales: {
                 x: {
+                    title: {
+                        display: true,
+                        text: "Time (s)",
+                        font: {
+                            size: 20,
+                        },
+                    },
                     grid: {
                         color: ["#ff0000"]
                     },
@@ -42,8 +49,24 @@ function initGraph() {
 		    }
                 },
                 y: {
+                    title: {
+                        display: true,
+                        text: "Magnetic field (μT)",
+                        font: {
+                            size: 20,
+                        },
+                    },
                     grid: {
                         color: ["#ff0000"]
+                    },
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return `Time: ${context.parsed.x.toFixed(3)} s, B: ${context.parsed.y.toFixed(3)} μT`;
+                        }
                     },
                 }
             },

@@ -87,8 +87,8 @@ function update() {
 		B_x = B_x_prime;
 		B_y = B_y_prime;
 		b_display.innerHTML += `B<sub>x</sub>: ${clampNumber
-			(B_x.toFixed(6))} μT <br> B<sub>y</sub>: ${clampNumber
-				(B_y.toFixed(6))} μT`;
+			(B_x.toFixed(3))} μT <br> B<sub>y</sub>: ${clampNumber
+				(B_y.toFixed(3))} μT`;
 	}
 }
 
