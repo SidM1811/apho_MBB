@@ -16,7 +16,6 @@ let graph_canvas = document.getElementById("graph-canvas");
 let graph_context = graph_canvas.getContext("2d");
 
 let b_display = document.getElementById("b-display");
-let t_display = document.getElementById("t-display");
 let error_display = document.getElementById("error-display");
 
 let mob_angle = document.getElementById("mob-angle");

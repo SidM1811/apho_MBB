@@ -91,5 +91,4 @@ function resetGraph() {
 	if (graph !== undefined) graph.destroy();
 	initGraph();
 	time = 0;
-	updateParams("time");
 }

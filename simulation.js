@@ -72,12 +72,12 @@ function update() {
 	B_y = constant_part * dipole_moment * (3 * rdotm * disp_y / Math.pow(distance, 5) - magnet_y / Math.pow(distance, 3)) * magnetism_multiplier;
 
 	if (getMagn(B_x, B_y) > B_crit) {
-		error_display.innerHTML = 'Maximum Magnetic field exceeded';
+		error_display.style.display = "block";
 		B_x = NaN;
 		B_y = NaN;
 	}
 	else {
-		error_display.innerHTML = '';
+		error_display.style.display = "none";
 		let mobile_angle = Number.parseInt(mob_angle.value);
 		if (Number.isNaN(mobile_angle)) {
 			mobile_angle = 0;
@@ -142,9 +142,6 @@ function updateParams(variable) {
 		angle = Math.floor(angle);
 		scale.transform(Number.parseInt(angle));
 		updated = false;
-	}
-	if (variable == "time") {
-		t_display.innerHTML = `Time: ${time.toFixed(2)} s`;
 	}
 	if (variable == "simul-start-time-input") {
 		start_time = Number.parseFloat(simul_start_time_input.value);
