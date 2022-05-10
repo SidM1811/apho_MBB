@@ -78,7 +78,11 @@ function update() {
 	}
 	else {
 		error_display.innerHTML = '';
-		let orientation = toRadian(mob_angle.value);
+		let mobile_angle = Number.parseInt(mob_angle.value);
+		if (Number.isNaN(mobile_angle)) {
+			mobile_angle = 0;
+		}
+		let orientation = toRadian(mobile_angle);
 
 		// rotation
 		let B_x_prime = Math.cos(orientation) * B_x + Math.sin(orientation) * B_y;
@@ -109,19 +113,34 @@ function render() {
 function updateParams(variable) {
 	if (variable == "mob-angle") {
 		let angle = Number.parseInt(mob_angle.value);
+		if (Number.isNaN(angle)) {
+			angle = 0;
+		}
+
+		angle = Math.floor(angle);
 		mob.transform(angle);
 		magnetometer.transform(angle);
-		// mob_display.innerHTML = `Angle of orientation of mobile: ${mob.angle}`;
 		updated = false;
 	}
 	if (variable == "magnet-angle") {
-		magnet.transform(Number.parseInt(magnet_angle.value));
-		// magnet_display.innerHTML = `Angle of orientation of magnet: ${magnet.angle}`;
+		let angle = Number.parseInt(magnet_angle.value);
+		if (Number.isNaN(angle)) {
+			angle = 0;
+		}
+
+		angle = Math.floor(angle);
+		angle = angle.toFixed(0);
+		magnet.transform(angle);
 		updated = false;
 	}
 	if (variable == "scale-angle") {
-		scale.transform(Number.parseInt(scale_angle.value));
-		// scale_display.innerHTML = `Angle of orientation of scale: ${scale.angle}`;
+		let angle = Number.parseInt(scale_angle.value);
+		if (Number.isNaN(angle)) {
+			angle = 0;
+		}
+
+		angle = Math.floor(angle);
+		scale.transform(Number.parseInt(angle));
 		updated = false;
 	}
 	if (variable == "time") {
