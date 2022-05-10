@@ -98,8 +98,8 @@ class Mobile {
         drawArrow(this.arrow_1);
         drawArrow(this.arrow_2);
 
-        context.fillText("x", this.x_label.x, this.x_label.y);
-        context.fillText("y", this.y_label.x, this.y_label.y);
+        context.fillText("Bx", this.x_label.x, this.x_label.y);
+        context.fillText("By", this.y_label.x, this.y_label.y);
     }
     select() {
         this.selected = true;
@@ -229,8 +229,8 @@ class Mobile {
         }
 
         this.x_label = {
-            x: this.arrow_1.end_x + 0.005 * Math.cos(this.angle * Math.PI / 180) / scaling_factor,
-            y: this.arrow_1.end_y + 0.005 * Math.sin(this.angle * Math.PI / 180) / scaling_factor
+            x: this.arrow_1.end_x + 0.01 * Math.cos(this.angle * Math.PI / 180) / scaling_factor,
+            y: this.arrow_1.end_y + 0.01 * Math.sin(this.angle * Math.PI / 180) / scaling_factor
         }
 
         // second arrow
@@ -252,8 +252,8 @@ class Mobile {
         }
 
         this.y_label = {
-            x: this.arrow_2.end_x + 0.005 * Math.cos(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor,
-            y: this.arrow_2.end_y + 0.005 * Math.sin(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor
+            x: this.arrow_2.end_x + 0.01 * Math.cos(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor,
+            y: this.arrow_2.end_y + 0.01 * Math.sin(this.angle * Math.PI / 180 + Math.PI / 2) / scaling_factor
         }
     }
 }
