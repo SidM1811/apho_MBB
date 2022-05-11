@@ -4,7 +4,7 @@ function initGraph() {
         data: {
             labels: timestamps,
             datasets: [{
-                label: "Bx (in μT)",
+                label: "B_w (in μT)",
                 data: Bx_values,
                 backgroundColor: ["#ffffff"],
                 borderColor: ["#ffffff"],
@@ -17,7 +17,7 @@ function initGraph() {
 		animation: false
             },
 		{
-                label: "By (in μT)",
+                label: "B_l (in μT)",
                 data: By_values,
                 backgroundColor: ["#00ff00"],
                 borderColor: ["#00ff00"],
