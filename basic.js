@@ -1,6 +1,6 @@
 let screen_width = window.innerWidth, screen_height = window.innerHeight;
 let canvas_width, canvas_height;
-let fps = 500, updated = false, paused = false;
+let fps = 500, updated = false;
 let mobile;
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -72,7 +72,7 @@ function step() {
         time += dt;
         updateParams('time');
     }
-    if (falling && !paused) {
+    if (falling) {
         magnet.fall();
     }
     if (getMagn(B_x, B_y) < B_crit && measuring) document.getElementById("drop_button").disabled = false;
@@ -194,42 +194,8 @@ function measureToggle() {
         measuring = false;
         measure_button.innerHTML = "Start Measurement";
         document.getElementById("drop_button").disabled = SVGComponentTransferFunctionElement;
-
-        /* 	    console.log("t,bx,by");
-                console.log(timestamps);
-                console.log(Bx_values);
-                console.log(By_values);
-                console.log(magnet_x_values);
-                console.log(magnet_y_values);
-                console.log("pipe coordinates");
-                console.log(pipe.points);
-                console.log("magnetometer and mobile angle")
-                console.log(magnetometer.angle);
-                console.log("magnetometer x and y");
-                console.log([magnetometer.x,magnetometer.y]);
-                console.log('mobile points');
-                console.log(mob.points);
-                console.log('pipe');
-                console.log(pipe.points);
-                console.log('Scale factor');
-                console.log(scaling_factor);
-         */
-        //let mydata = [timestamps,Bx_values,By_values,magnet_y_values]
-        // export_csv(datatable, ',', "pipedata")
     }
 }
-
-/*function pauseToggle() {
-    if (!paused) {
-        paused = true;
-        pause_button.innerHTML = "Resume";
-    }
-    else {
-        paused = false;
-        pause_button.innerHTML = "Pause";
-    }
-}*/
-
 const export_csv = (arrayData, delimiter, fileName) => {
     //  alert("in export");
     let csv = "Magnet in Pipe Simulation Data\n";

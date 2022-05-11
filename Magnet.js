@@ -69,58 +69,6 @@ class Magnet {
 			updated = false;
 		}
 	}
-
-/* 	fall() {
-		let old_y = this.y;
-		let inside_pipe = this.insidePipe();
-		let colliding = this.colliding();
-		let p = 0;
-		if (1 <= inside_pipe && inside_pipe < 4 && !colliding) {
-			if (inside_pipe == 1) {
-				p = 1.96;
-			} else if (inside_pipe == 3) {
-				p = 5.88;
-			}
-		}
-		if (p !== this.current_k) {
-			this.segment_x0 = this.x;
-			this.segment_y0 = this.y;
-			this.current_k = p;
-			this.segment_t0 = time-1/fps;
-			this.segment_v0y = this.velocity;
-		}
-		if (!colliding) {
-			let δt = time - this.segment_t0;
-			let k = this.current_k;
-			if (k !== 0) {
-				let temp = (k * δt / this.mass > 40 ? 0 : Math.exp(-k * δt / this.mass));
-				this.y = this.segment_y0 + (this.mass * gravity * (δt) / k + this.mass / k * (this.segment_v0y - this.mass * gravity / k) * (1-temp)) / scaling_factor;
-				this.velocity = (this.segment_v0y - this.mass * gravity / k) * temp + this.mass * gravity / k;
-			} else {
-				this.y = this.segment_y0 + (1 / 2 * gravity * δt * δt + this.segment_v0y * δt)/scaling_factor;
-				this.velocity = this.segment_v0y + gravity * δt;
-			}
-		} else {
-			this.velocity = 0;
-		}
-
-		if (this.y + this.height / 2 > canvas_height) {
-			this.y = canvas_height - this.height / 2;
-			this.on_ground = true;
-			this.velocity=0;
-			this.segment_v0y=0;
-			falling=false;
-			pauseToggle();
-		} else {
-			this.on_ground = false;
-		}
-		for (let point of this.points) point.y += this.y - old_y;
-		for (let point of this.blue_points) point.y += this.y - old_y;
-		updated = false;
-	}
- */	
-
-
 	render() {
 		context.fillStyle = "#1f51ff";
 		context.beginPath();
@@ -265,23 +213,30 @@ class Magnet {
 		}
 		return 0;
 	}
-	
 	colliding() {
-		if (this.points[2].y > pipe.points[1].y && this.points[1].y < pipe.points[2].y) {
-			let x_min = 10000;
-			let x_max = -10000;
-			for (let i = 0; i < this.points.length; i++) {
-				if (this.points[i].x < x_min) x_min = this.points[i].x;
-				if (this.points[i].x > x_max) x_max = this.points[i].x;
-			}
-			for (let i = 0; i < this.points.length; i++) {
-				if (this.blue_points[i].x < x_min) x_min = this.blue_points[i].x;
-				if (this.blue_points[i].x > x_max) x_max = this.blue_points[i].x;
-			}
-			if (pipe.points[0].x > x_min && pipe.points[0].x < x_max) return true;
-			if (pipe.points[1].x > x_min && pipe.points[1].x < x_max) return true;
-
+		let y_min = 10000;
+		let y_max = -10000;
+		for (let i = 0; i < this.points.length; i++) {
+			if (this.points[i].y < y_min) y_min = this.points[i].y;
+			if (this.points[i].y > y_max) y_max = this.points[i].y;
 		}
+		for (let i = 0; i < this.points.length; i++) {
+			if (this.blue_points[i].y < y_min) y_min = this.blue_points[i].y;
+			if (this.blue_points[i].y > y_max) y_max = this.blue_points[i].y;
+		}
+		if (y_min > pipe.points[2].y || y_max < pipe.points[1].y) return false;
+		let x_min = 10000;
+		let x_max = -10000;
+		for (let i = 0; i < this.points.length; i++) {
+			if (this.points[i].x < x_min) x_min = this.points[i].x;
+			if (this.points[i].x > x_max) x_max = this.points[i].x;
+		}
+		for (let i = 0; i < this.points.length; i++) {
+			if (this.blue_points[i].x < x_min) x_min = this.blue_points[i].x;
+			if (this.blue_points[i].x > x_max) x_max = this.blue_points[i].x;
+		}
+		if (pipe.points[0].x > x_min && pipe.points[0].x < x_max) return true;
+		if (pipe.points[1].x > x_min && pipe.points[1].x < x_max) return true;
 		return false;
 	}
 
@@ -365,7 +320,6 @@ class Magnet {
 		let colliding = this.colliding();
 
 		if (!colliding) {
-			let ddt = time - this.segment_t0;
 			let k = this.current_k;
 			if (k !== 0) {
 				new_y = this.dampedFall_distance(k, this.segment_t0, this.segment_y0, this.segment_v0y, time);
@@ -428,7 +382,9 @@ class Magnet {
 			// update y position and velocity
 
 		} else {
-			this.velocity = 0;
+			falling = false;
+			new_y = this.y;
+			new_vy = 0;
 		}
 
 		this.y = new_y;
@@ -441,9 +397,7 @@ class Magnet {
 			this.velocity=0;
 			this.segment_v0y=0;
 			falling=false;
-			//pauseToggle();
 		} else {
-			//if(this.on_ground)error_display.innerHTML="";
 			this.on_ground = false;
 		}
 		for (let point of this.points) point.y += this.y - old_y;

@@ -25,7 +25,6 @@ function dropMagnet() {
 		falling = true;
 		magnet.initFall();
 	}
-	//if (paused)pauseToggle();
 }
 
 function resetMeasurements() {
@@ -41,7 +40,6 @@ function resetMeasurements() {
 function resetMagnet() {
 	falling = false;
 	magnet.resetPosition();
-	//if (!paused)pauseToggle();
 }
 
 function update() {
@@ -51,18 +49,15 @@ function update() {
 	// displacement vector joining center of dipole to magnetometer
 	let disp_x = (magnetometer.x - magnet.x) * distance_multiplier;
 	let disp_y = (magnetometer.y - magnet.y) * distance_multiplier;
-	let disp_magn = getMagn(disp_x, disp_y);
 
 	// dipole moment unit vector pointing from south (blue) to north (red)
 	let magnet_x = Math.sin(toRadian(magnet.angle));
 	// natural orientation of the magnet is vertical, hence the interchange of sin() and cos()
 	let magnet_y = -Math.cos(toRadian(magnet.angle));
 	// quirk of coordinate system of electronic displays: Y decreases as we go up
-	let magnet_magn = getMagn(magnet_x, magnet_y);
 
 	// calculating angle between displacement vector and dipole moment unit vector
 	let rdotm = getDotProduct(disp_x, magnet_x, disp_y, magnet_y);
-	let theta = Math.acos(rdotm / magnet_magn / disp_magn);
 
 	// for debugging purposes only. Seems to calculate angle correctly
 	// b_display.innerHTML =`Angle between r and m: ${toDegree(theta).toFixed(2)} <br> <br>`;
@@ -101,7 +96,6 @@ function render() {
 	context.fillRect(0, 0, canvas_width, canvas_height);
 
 	drawGrid();
-	drawArrows();
 
 	mob.render();
 	magnetometer.render();
@@ -227,22 +221,6 @@ function initParams() {
 
 	context.font = `${Math.floor(0.01 / scaling_factor)}px Times New Roman`;
 	context.textAlign = "center";
-}
-
-function drawArrows() {
-	// let arrow_length = 200;
-	// context.strokeStyle = "#000000";
-	// context.fillStyle = "#000000";
-
-	// let x = 0.015 / scaling_factor;
-	// let y = 0.005 / scaling_factor;
-	// drawArrow(x, y, x + arrow_length, y);
-	// context.fillText("x", 1.25 * x + arrow_length, 1.25 * y);
-
-	// x = 0.005 / scaling_factor;
-	// y = 0.015 / scaling_factor;
-	// drawArrow(x, y, x, y + arrow_length);
-	// context.fillText("y", x, 1.5 * y  + arrow_length);
 }
 
 function drawGrid() {
