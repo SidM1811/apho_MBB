@@ -65,7 +65,7 @@ function initGraph() {
                 tooltip: {
                     callbacks: {
                         label: function (context) {
-                            return `Time: ${context.parsed.x.toFixed(3)} s, B: ${context.parsed.y.toFixed(3)} μT`;
+                            return `Time: ${context.parsed.x.toFixed(3)} s, B: ${context.parsed.y.toFixed(2)} μT`;
                         }
                     },
                 }
