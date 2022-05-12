@@ -100,11 +100,11 @@ class Mobile {
 
         context.font = "30px Serif";
         context.fillText("B", this.x_label.x, this.x_label.y);
-        context.fillText("B", this.y_label.x, this.y_label.y);
+        context.fillText("B", this.y_label.x - 5, this.y_label.y);
 
         context.font = "20px Serif";
         context.fillText("w", this.x_label.x + 15, this.x_label.y + 10)
-        context.fillText("l", this.y_label.x + 12, this.y_label.y + 10)
+        context.fillText("l", this.y_label.x + 12 - 5, this.y_label.y + 10)
     }
     select() {
         this.selected = true;
