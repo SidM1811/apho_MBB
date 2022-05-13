@@ -295,6 +295,7 @@ class Magnet {
 	initFall()
 	{
 		let inside_pipe = this.insidePipe();
+		let colliding = this.colliding();
 		let p = 0;
 		if (1 <= inside_pipe && inside_pipe < 4 && !colliding) {
 			if (inside_pipe == 1) {
