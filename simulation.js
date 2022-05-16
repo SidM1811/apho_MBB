@@ -24,6 +24,7 @@ function dropMagnet() {
 		magnet.backupPosition();
 		falling = true;
 		magnet.initFall();
+		drop_button.disabled = true;
 	}
 }
 
@@ -38,6 +39,7 @@ function resetMeasurements() {
 }
 
 function resetMagnet() {
+	drop_button.disabled = false;
 	falling = false;
 	magnet.resetPosition();
 }

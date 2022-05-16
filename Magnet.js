@@ -56,6 +56,7 @@ class Magnet {
 			this.angle = 0;
 			this.transform(prev_angle);
 
+			self.checkOnGround();
 			updated = false;
 		}
 	}
@@ -196,9 +197,9 @@ class Magnet {
 		this.angle = 0;
 		this.x = this.backup_x;
 		this.y = this.backup_y;
+		this.checkOnGround();
 		this.makeRects();
 		this.transform(this.backup_angle);
-		magnet_display.innerHTML = `Angle of orientation of magnet: ${magnet.angle}`;
 		updated = false;
 	}
 	insidePipe() {
@@ -418,5 +419,15 @@ class Magnet {
 			}
 		}
 		return 0;
+	}
+
+	// Method: checkOnGround: Added by Chandan
+	// Required for determining if the drop button should be disabled or not
+	checkOnGround() {
+		if (this.y + this.height / 2 > canvas_height) {
+			this.on_ground = true;
+		} else {
+			this.on_ground = false;
+		}
 	}
 }	

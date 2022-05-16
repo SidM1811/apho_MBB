@@ -29,6 +29,7 @@ let scale_display = document.getElementById("scale-display");
 
 let coord_display = document.getElementById("coord-display");
 
+let drop_button = document.getElementById("drop-button");
 let measure_button = document.getElementById("measure-button");
 let scale_button = document.getElementById("scale-button");
 
@@ -75,11 +76,21 @@ function step() {
     if (falling) {
         magnet.fall();
     }
-    if (getMagn(B_x, B_y) < B_crit && measuring) document.getElementById("drop_button").disabled = false;
-    else document.getElementById("drop_button").disabled = SVGComponentTransferFunctionElement;
+    if (getMagn(B_x, B_y) < B_crit && measuring) {
+        drop_button.disabled = false;
+    }
+    else {
+        drop_button.disabled = true;
+    }
+
+    if (falling || magnet.on_ground) {
+        drop_button.disabled = true;
+    }
 
     if (getMagn(B_x, B_y) >= B_crit) {
-        if (measuring && falling) measureToggle();
+        if (measuring && falling) {
+            measureToggle();
+        }
         falling = false;
     }
     animate(step);
@@ -193,9 +204,10 @@ function measureToggle() {
     else {
         measuring = false;
         measure_button.innerHTML = "Start Measurement";
-        document.getElementById("drop_button").disabled = SVGComponentTransferFunctionElement;
+        drop_button.disabled = false;
     }
 }
+
 const export_csv = (arrayData, delimiter, fileName) => {
     //  alert("in export");
     let csv = "Magnet in Pipe Simulation Data\n";
