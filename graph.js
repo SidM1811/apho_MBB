@@ -6,28 +6,28 @@ function initGraph() {
             datasets: [{
                 label: "B_w (in μT)",
                 data: Bx_values,
-                backgroundColor: ["#ffffff"],
-                borderColor: ["#ffffff"],
-                color: ["#ffffff"],
-		spanGaps: true,
-		//showLine: true,
-		pointRadius: 1.0,
-		pointHoverRadius: 4.0,
-		borderWidth: 1.0,
-		animation: false
+                backgroundColor: ["#0000ff"],
+                borderColor: ["#0000ff"],
+                color: ["#0000ff"],
+                spanGaps: true,
+                //showLine: true,
+                pointRadius: 1.0,
+                pointHoverRadius: 4.0,
+                borderWidth: 1.0,
+                animation: false
             },
-		{
+            {
                 label: "B_l (in μT)",
                 data: By_values,
                 backgroundColor: ["#00ff00"],
                 borderColor: ["#00ff00"],
                 color: ["#00ff00"],
-		spanGaps: true,
-		//showLine: true,
-		pointRadius: 1.0,
-		pointHoverRadius: 4.0,
-		borderWidth: 1.0,
-		animation: false
+                spanGaps: true,
+                //showLine: true,
+                pointRadius: 1.0,
+                pointHoverRadius: 4.0,
+                borderWidth: 1.0,
+                animation: false
             }]
         },
         options: {
@@ -40,13 +40,18 @@ function initGraph() {
                         font: {
                             size: 20,
                         },
+                        color: "white",
                     },
                     grid: {
-                        color: ["#ff0000"]
+                        color: ["#ffffff"],
+                        borderColor: "white",
+                        lineWidth: 0.25
                     },
-			ticks:{
-			precision:2
-		    }
+                    ticks: {
+                        precision: 2,
+                        color: "white",
+                        fontColor: "white"
+                    }
                 },
                 y: {
                     title: {
@@ -55,9 +60,16 @@ function initGraph() {
                         font: {
                             size: 20,
                         },
+                        color: "white",
                     },
                     grid: {
-                        color: ["#ff0000"]
+                        color: ["#ffffff"],
+                        borderColor: "white",
+                        lineWidth: 0.25
+                    },
+                    ticks: {
+                        color: "white",
+                        fontColor: "white"
                     },
                 }
             },
@@ -68,6 +80,11 @@ function initGraph() {
                             return `Time: ${context.parsed.x.toFixed(3)} s, B: ${context.parsed.y.toFixed(2)} μT`;
                         }
                     },
+                },
+                legend: {
+                    labels: {
+                        color: "white"
+                    }
                 }
             },
             normalized: true,
@@ -86,9 +103,9 @@ function drawGraph(t_start, t_end) {
 }
 
 function resetGraph() {
-	if (measuring) measureToggle();
-	resetMeasurements();
-	if (graph !== undefined) graph.destroy();
-	initGraph();
-	time = 0;
+    if (measuring) measureToggle();
+    resetMeasurements();
+    if (graph !== undefined) graph.destroy();
+    initGraph();
+    time = 0;
 }
