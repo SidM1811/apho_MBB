@@ -1,7 +1,8 @@
 let fine_factor = 1;
 let finify = 2;
-let zoom_in_counter = 4;
-let zoom_out_counter = 4;
+let zoom_in_counter = 3;
+let zoom_out_counter = 3;
+
 function clicked() {
     if(insidePolygon(click_x, click_y, magnet.points)) {
         magnet.select();
@@ -47,23 +48,29 @@ function moved() {
 }
 
 function finer() {
+    fine_factor *= finify;
+    zoom_in_counter -= 1;
+    zoom_out_counter += 1;
+
     if (zoom_in_counter > 0) {
         document.getElementById("coarser-button").disabled = false;
-        fine_factor *= finify;
-        zoom_in_counter -= 1;
-        zoom_out_counter += 1;
     }
-    else document.getElementById("finer-button").disabled = SVGComponentTransferFunctionElement;
+    else {
+        document.getElementById("finer-button").disabled = true;
+    }
 }
 
 function coarser() {
+    fine_factor /= finify;
+    zoom_out_counter -= 1;
+    zoom_in_counter += 1;
+
     if (zoom_out_counter > 0) {
         document.getElementById("finer-button").disabled = false;
-        fine_factor /= finify;
-        zoom_out_counter -= 1;
-        zoom_in_counter += 1;
     }
-    else document.getElementById("coarser-button").disabled = SVGComponentTransferFunctionElement;
+    else {
+        document.getElementById("coarser-button").disabled = true;
+    }
 }
 
 function released() {
