@@ -56,7 +56,7 @@ class Magnet {
 			this.angle = 0;
 			this.transform(prev_angle);
 
-			self.checkOnGround();
+			this.checkOnGround();
 			updated = false;
 		}
 	}

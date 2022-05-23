@@ -24,6 +24,7 @@ function clicked() {
 function moved() {
     if(magnet.selected) {
         magnet.update();
+        falling = false;
     }
     else if (scale.selected || scale.rotateselected) {
         scale.update();
