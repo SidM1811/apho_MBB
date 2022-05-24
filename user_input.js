@@ -7,10 +7,10 @@ function clicked() {
     if(insidePolygon(click_x, click_y, magnet.points)) {
         magnet.select();
     }
-    else if (insidePolygon(click_x, click_y, scale.cornerpts)) {
+    else if (show_scale && insidePolygon(click_x, click_y, scale.cornerpts)) {
         scale.rotateselect();
     }
-    else if (insidePolygon(click_x, click_y, scale.points)) {
+    else if (show_scale && insidePolygon(click_x, click_y, scale.points)) {
         scale.select();
     }
     else if(insidePolygon(click_x, click_y, mob.points)) {
@@ -36,7 +36,7 @@ function moved() {
         pipe.update();
     }
     else {
-        if(insidePolygon(click_x, click_y, scale.cornerpts)) {
+        if(show_scale && insidePolygon(click_x, click_y, scale.cornerpts)) {
             document.getElementById("canvas").style.cursor = "crosshair";
         }
         else if (show_scale && insidePolygon(click_x, click_y, scale.points)) {

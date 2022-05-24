@@ -41,7 +41,6 @@ class Scale {
             if (prev_angle < 0) {
                 prev_angle += 360;
             }
-            scale_display.innerHTML = `Angle of orientation of scale: ${Math.trunc(prev_angle * 100) / 100}`;
             scale_angle.value = Math.trunc(prev_angle);
             this.makeRect();
             this.angle = 0;
