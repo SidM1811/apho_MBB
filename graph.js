@@ -38,6 +38,7 @@ function initGraph() {
                         display: true,
                         text: "Time (s)",
                         font: {
+                            family: "calibri",
                             size: 20,
                         },
                         color: "white",
@@ -58,6 +59,7 @@ function initGraph() {
                         display: true,
                         text: "Magnetic field (μT)",
                         font: {
+                            family: "calibri",
                             size: 20,
                         },
                         color: "white",
@@ -83,7 +85,10 @@ function initGraph() {
                 },
                 legend: {
                     labels: {
-                        color: "white"
+                        color: "white",
+                        font: {
+                            family: "calibri"
+                        }
                     }
                 }
             },
