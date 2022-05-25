@@ -19,15 +19,8 @@ let b_display = document.getElementById("b-display");
 let error_display = document.getElementById("error-display");
 
 let mob_angle = document.getElementById("mob-angle");
-let mob_display = document.getElementById("mob-display");
-
 let magnet_angle = document.getElementById("magnet-angle");
-let magnet_display = document.getElementById("magnet-display");
-
 let scale_angle = document.getElementById("scale-angle");
-let scale_display = document.getElementById("scale-display");
-
-let coord_display = document.getElementById("coord-display");
 
 let drop_button = document.getElementById("drop-button");
 let measure_button = document.getElementById("measure-button");

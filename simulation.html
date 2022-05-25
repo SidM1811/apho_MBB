@@ -40,7 +40,6 @@
          <div class="col s12 l4 push-l1">
             <center>
                Intergrid spacing: 1 cm
-               <!--<p id="coord-display"></p>-->
                <p id="b-display"></p>
                <p style="padding: 10px; border: 2px solid red; background: black; display: none;" id="error-display">
                   <b>Maximum magnetic field exceeded</b>
@@ -48,19 +47,16 @@
             </center>
             <center>
                <div class="col s12">
-                  <!-- <p id="mob-display"></p> -->
                   <span>Rotate mobile:</span>
                   <input id="mob-angle" type="range" min="0" max="359" step="1" oninput="updateParams('mob-angle')"
                      onchange="updateParams('mob-angle')">
                </div>
                <div class="col s12">
-                  <!-- <p id="magnet-display"></p> -->
                   <span>Rotate magnet:</span>
                   <input id="magnet-angle" type="range" min="0" max="359" step="1"
                      oninput="updateParams('magnet-angle')" onchange="updateParams('magnet-angle')">
                </div>
                <div class="col s12">
-                  <!-- <p id="scale-display"></p> -->
                   <span>Rotate scale:</span>
                   <input id="scale-angle" type="range" min="0" max="359" step="1" oninput="updateParams('scale-angle')"
                      onchange="updateParams('scale-angle')">
