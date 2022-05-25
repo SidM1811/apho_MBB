@@ -19,16 +19,14 @@ class Pipe {
         this.angle = 0;
     }
     update() {
-        if (!falling) {
-            this.x = this.initial_x + click_x - this.selected_x;
-            this.y = this.initial_y + click_y - this.selected_y;
-            this.makeRects();
-            let prev_angle = this.angle;
-            this.angle = 0;
-            this.transform(prev_angle);
+        this.x = this.initial_x + click_x - this.selected_x;
+        this.y = this.initial_y + click_y - this.selected_y;
+        this.makeRects();
+        let prev_angle = this.angle;
+        this.angle = 0;
+        this.transform(prev_angle);
 
-            updated = false;
-        }
+        updated = false;
     }
     render() {
         context.fillStyle = "#FFFFFF";
