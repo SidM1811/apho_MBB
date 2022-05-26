@@ -169,7 +169,7 @@ function initParams() {
 	let mobile_height = 0.15;
 
 	// grid position of mobile's left corner
-	let i = 4, j = 4;
+	let i = 4.23, j = 4.69;
 
 	// coords of mobile's left corner
 	let mob_x = (i * 0.01 + mobile_width / 2) / scaling_factor;
@@ -184,8 +184,8 @@ function initParams() {
 	let pipe_diameter = 0.01;
 
 	// in meters
-	let magnet_x = mob_x + (0.03 + mobile_width / 2) / scaling_factor;
-	let magnet_y = canvas_height / 2;
+	let magnet_x = mob_x + (0.033 + mobile_width / 2) / scaling_factor;
+	let magnet_y = canvas_height / 2 + 0.014 / scaling_factor;
 
 	// in meters
 	let magnet_length = 0.005;
