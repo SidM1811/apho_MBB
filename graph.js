@@ -6,9 +6,9 @@ function initGraph() {
             datasets: [{
                 label: "B_w (in μT)",
                 data: Bx_values,
-                backgroundColor: ["#0000ff"],
-                borderColor: ["#0000ff"],
-                color: ["#0000ff"],
+                backgroundColor: ["#ffffff"],
+                borderColor: ["#ffffff"],
+                color: ["#ffffff"],
                 spanGaps: true,
                 //showLine: true,
                 pointRadius: 1.0,
