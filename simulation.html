@@ -27,49 +27,40 @@
 </head>
 
 <body>
-</body>
-
-<div class="text">
-   <div class="container">
-      <div class="row">
-         <div class="col s12 l7">
-            <center>
+   <div class="text">
+      <div class="container" style="width: 100%">
+         <div class="row">
+            <div class="col s12 l8">
                <canvas style="border-bottom: 5px solid red" id="canvas"></canvas>
-            </center>
-         </div>
-         <div class="col s12 l4 push-l1">
-            <center>
-               Intergrid spacing: 1 cm
-               <p id="b-display"></p>
-               <p style="padding: 10px; border: 2px solid red; background: black; display: none;" id="error-display">
-                  <b>Maximum magnetic field exceeded</b>
-               </p>
-            </center>
-            <center>
-               <div class="col s12">
+            </div>
+            <div class="col s12 l3 push-l1">
+               <center>
+                  <p>
+                     Intergrid spacing: 1 cm
+                  </p>
+                  <p id="b-display"></p>
+                  <p style="padding: 10px; border: 2px solid red; background: black; display: none;" id="error-display">
+                     <b>Maximum magnetic field exceeded</b>
+                  </p>
+
                   <span>Rotate mobile:</span>
                   <input id="mob-angle" type="range" min="0" max="359" step="1" oninput="updateParams('mob-angle')"
                      onchange="updateParams('mob-angle')">
-               </div>
-               <div class="col s12">
+
                   <span>Rotate magnet:</span>
                   <input id="magnet-angle" type="range" min="0" max="359" step="1"
                      oninput="updateParams('magnet-angle')" onchange="updateParams('magnet-angle')">
-               </div>
-               <div class="col s12">
+
                   <span>Rotate scale:</span>
                   <input id="scale-angle" type="range" min="0" max="359" step="1" oninput="updateParams('scale-angle')"
                      onchange="updateParams('scale-angle')">
-               </div>
-               <div class="col s12">
+
                   <span>Graph start time, t<sub>i</sub> (s):</span>
                   <input id="simul-start-time-input" type="number" onchange="updateParams('simul-start-time-input')">
-               </div>
-               <div class="col s12">
+
                   <span>Graph end time, t<sub>f</sub> (s):</span>
                   <input id="simul-end-time-input" type="number" onchange="updateParams('simul-end-time-input')">
-               </div>
-               <div class="col s12">
+
                   <br>
                   <button class="btn purple darken-4" onclick="measureToggle()" id="measure-button">Start
                      Measurement</button>
@@ -79,22 +70,22 @@
                   <button class="btn purple darken-4" onclick="dropMagnet()" id="drop-button" disabled>Drop</button>
                   <button class="btn purple darken-4" onclick="resetMagnet()">Reset Positions</button>
                   <br> <br>
-               </div>
-            </center>
+               </center>
+            </div>
          </div>
+         <center>
+            <button class="btn purple darken-4" onclick="finer()" id="finer-button">2X Finer magnet movement</button>
+            <button class="btn purple darken-4" onclick="coarser()" id="coarser-button">2X Coarser magnet
+               movement</button>
+            <button class="btn purple darken-4" onclick="scaleToggle()" id="scale-button">Show Scale</button>
+         </center>
+         <h2>B<sub>w</sub> & B<sub>l</sub> vs t graph</h2>
       </div>
-      <center>     
-         <button class="btn purple darken-4" onclick="finer()" id="finer-button">2X Finer magnet movement</button>
-         <button class="btn purple darken-4" onclick="coarser()" id="coarser-button">2X Coarser magnet
-            movement</button>
-         <button class="btn purple darken-4" onclick="scaleToggle()" id="scale-button">Show Scale</button>
-      </center>
-      <h2>B<sub>w</sub> & B<sub>l</sub> vs t graph</h2>
-   </div>
 
-   <center>
-      <canvas id="graph-canvas"></canvas>
-   </center>
-</div>
+      <center>
+         <canvas id="graph-canvas"></canvas>
+      </center>
+   </div>
+</body>
 
 </html>
